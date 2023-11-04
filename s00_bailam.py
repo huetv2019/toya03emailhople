@@ -32,8 +32,32 @@ get_name_in_email([None, 'abb#ccc'])                      | ['ERROR invaid email
 #endregion debai
 
 #region bailam
+import re
+
+
 def get_name_in_email(email_list):
-  return 'todo'
+
+      results = []
+
+      for email in email_list:
+
+          if not email:
+              results.append("ERROR invaid email")
+              continue
+
+          pattern = r"^([a-zA-Z0-9_.+-]+)@([a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)$"
+
+          regex = re.compile(pattern)
+          match = regex.match(email)
+
+          if match:
+              name = match.group(1)
+              results.append(name)
+
+          else:
+              results.append("ERROR invaid email")
+
+      return results
   
 
 if __name__=='__main__':
